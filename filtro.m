@@ -15,21 +15,21 @@ function sinal_saida = filtro(sinal_entrada)
 
 %% Definição do filtro
 % Constantes básicas (cf. memorial de cálculo)
-    f_s = 16000;         % Frequência de amostragem em Hz
-    f_c = 1000;          % Frequência de corte em Hz
-    M = 297; 			% Número de amostras do filtro
-    w_c = pi/8;			% Frequência de corte normalizada
-    n = 0:M-1;			% n variando de 0 a M-1
+    f_s = 16000;         	% Frequência de amostragem em Hz
+    f_c = 1000;          	% Frequência de corte em Hz
+    M = 264;
+    w_c = 2*pi*(f_c/f_s);	% Frequência de corte normalizada
+    n = 0:M;				% n variando de 0 a M
 
 % Janela de Hamming
-    w = 0.54 - 0.46 * cos((2 * pi .* n) / (M-1));
+    w = 0.54 - 0.46 * cos((2 * pi .* n) / M);
 
 % Adaptação do filtro passa-altas ideal
-    n_desloc = n - (M-1)/2; % Deslocamento n => n - (M-1)/2
-    h_d = -sin(w_c .* n_desloc) ./ (pi .* n_desloc); % De 0 até M-1
-    % Caso especial n = (M-1)/2. OBS.: somar 1 pois vetores matlab começam
+    n_desloc = n - M/2; % Deslocamento n => n - M/2
+    h_d = -sin(w_c .* n_desloc) ./ (pi .* n_desloc); % De 0 até M
+    % Caso especial n = M/2. OBS.: somar 1 pois vetores matlab começam
     % no índice 1
-    idx = 1 + (M-1)/2; 
+    idx = 1 + M/2; 
     h_d(idx) = 1 - (w_c / pi); 
 
 % Filtro passa altas
