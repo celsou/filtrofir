@@ -38,8 +38,7 @@ function sinal_saida = filtro(sinal_entrada)
 %% Filtra o sinal de entrada (se houver) e encerra o algoritmo
 if (nargin > 0)
     % Filtrar é convoluir o sinal com o filtro
-    sinal_saida = convolucao(h, 0, sinal_entrada, 0);
-    %sinal_saida = conv(h, sinal_entrada);
+    sinal_saida = convolucao(h, 0, sinal_entrada, 0);    
     return;
 end
 
